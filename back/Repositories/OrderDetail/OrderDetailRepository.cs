@@ -1,0 +1,66 @@
+using Back.Data.Infrastructure.EF.Models;
+using Back.Data.Infrastructure.EF;
+using Microsoft.EntityFrameworkCore;
+
+namespace back.Repositories.OrderDetail;
+
+public class OrderDetailRepository : IOrderDetailRepository
+{
+    private readonly OltpDbContext _dbContext;
+
+    public OrderDetailRepository(OltpDbContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
+
+    public async Task<IList<OrderDetailDao>> GetAllAsync()
+    {
+        return await _dbContext.OrderDetails
+            .Include(od => od.Product)
+            .Include(od => od.Order)
+            .AsNoTracking()
+            .ToListAsync();
+    }
+
+    public async Task<OrderDetailDao?> GetByIdAsync(int id)
+    {
+        return await _dbContext.OrderDetails
+            .Include(od => od.Product)
+            .Include(od => od.Order)
+            .FirstOrDefaultAsync(od => od.Id == id);
+    }
+
+    public async Task<IList<OrderDetailDao>> GetByOrderIdAsync(int orderId)
+    {
+        return await _dbContext.OrderDetails
+            .Where(od => od.OrderId == orderId)
+            .Include(od => od.Product)
+            .AsNoTracking()
+            .ToListAsync();
+    }
+
+    public async Task<OrderDetailDao> AddAsync(OrderDetailDao orderDetail)
+    {
+        _dbContext.OrderDetails.Add(orderDetail);
+        await _dbContext.SaveChangesAsync();
+        return orderDetail;
+    }
+
+    public async Task<OrderDetailDao> UpdateAsync(OrderDetailDao orderDetail)
+    {
+        _dbContext.OrderDetails.Update(orderDetail);
+        await _dbContext.SaveChangesAsync();
+        return orderDetail;
+    }
+
+    public async Task<bool> DeleteAsync(int id)
+    {
+        var orderDetail = await _dbContext.OrderDetails.FindAsync(id);
+        if (orderDetail == null)
+            return false;
+
+        _dbContext.OrderDetails.Remove(orderDetail);
+        await _dbContext.SaveChangesAsync();
+        return true;
+    }
+}

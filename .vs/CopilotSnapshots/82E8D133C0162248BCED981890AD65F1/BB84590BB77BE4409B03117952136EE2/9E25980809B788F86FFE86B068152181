@@ -1,0 +1,70 @@
+﻿using Back.Data.Infrastructure.EF.Models;
+using back.Repositories.Interfaces;
+using Back.Data.Infrastructure.EF;
+using Microsoft.EntityFrameworkCore;
+
+namespace back.Repositories.Implementations;
+
+/// <summary>
+/// Repository implementation for Customer entity.
+/// Uses EF Core for data access.
+/// </summary>
+public class CustomerRepository : ICustomerRepository
+{
+    private readonly OltpDbContext _dbContext;
+
+    public CustomerRepository(OltpDbContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
+
+    public async Task<IEnumerable<CustomerDao>> GetAllAsync()
+    {
+        return await _dbContext.Customers
+            .AsNoTracking()
+            .ToListAsync();
+    }
+
+    public async Task<CustomerDao?> GetByIdAsync(int id)
+    {
+        return await _dbContext.Customers
+            .Include(c => c.Orders)
+            .FirstOrDefaultAsync(c => c.Id == id);
+    }
+
+    public async Task<CustomerDao?> GetByEmailAsync(string email)
+    {
+        return await _dbContext.Customers
+            .FirstOrDefaultAsync(c => c.Email == email);
+    }
+
+    public async Task<CustomerDao> AddAsync(CustomerDao customer)
+    {
+        _dbContext.Customers.Add(customer);
+        await _dbContext.SaveChangesAsync();
+        return customer;
+    }
+
+    public async Task<CustomerDao> UpdateAsync(CustomerDao customer)
+    {
+        _dbContext.Customers.Update(customer);
+        await _dbContext.SaveChangesAsync();
+        return customer;
+    }
+
+    public async Task<bool> DeleteAsync(int id)
+    {
+        var customer = await _dbContext.Customers.FindAsync(id);
+        if (customer == null)
+            return false;
+
+        _dbContext.Customers.Remove(customer);
+        await _dbContext.SaveChangesAsync();
+        return true;
+    }
+
+    public async Task<bool> ExistsAsync(int id)
+    {
+        return await _dbContext.Customers.AnyAsync(c => c.Id == id);
+    }
+}

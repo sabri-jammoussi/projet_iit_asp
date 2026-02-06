@@ -1,0 +1,58 @@
+﻿
+using Back.Data.Infrastructure.EF;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
+
+namespace back;
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
+
+        // Add services to the container.
+        builder.Services.AddAuthorization();
+
+        // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+        builder.Services.AddOpenApi();
+		builder.Services.AddSwaggerGen();
+
+		builder.Services.AddDbContext<OltpDbContext>
+            (options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("UsersConnections"))
+            );
+		var app = builder.Build();
+
+        // Configure the HTTP request pipeline.
+        if (app.Environment.IsDevelopment())
+        {
+			app.MapOpenApi();
+			app.UseSwagger();
+			app.UseSwaggerUI();
+
+		}
+
+		app.UseHttpsRedirection();
+
+        app.UseAuthorization();
+
+        app.Run();
+		//for the (update-databse) will be in the startup of the app 
+		try
+		{
+			using var scope = app.Services.CreateScope();
+			using var dbContext = scope.ServiceProvider.GetService<OltpDbContext>();
+			if (dbContext != null)
+			{
+				  dbContext.Database.MigrateAsync();
+			}
+			app.Run();
+
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine(ex.ToString());
+		}
+	}
+}

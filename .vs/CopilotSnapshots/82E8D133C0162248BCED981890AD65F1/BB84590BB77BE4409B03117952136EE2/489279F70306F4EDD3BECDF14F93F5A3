@@ -1,0 +1,18 @@
+﻿using Back.Data.Infrastructure.EF.Models;
+
+namespace back.Repositories.Interfaces;
+
+/// <summary>
+/// Repository interface for Order entity.
+/// Defines data access operations for Orders.
+/// </summary>
+public interface IOrderRepository
+{
+    Task<IEnumerable<OrderDao>> GetAllAsync();
+    Task<OrderDao?> GetByIdAsync(int id);
+    Task<IEnumerable<OrderDao>> GetByCustomerIdAsync(int customerId);
+    Task<OrderDao> AddAsync(OrderDao order);
+    Task<OrderDao> UpdateAsync(OrderDao order);
+    Task<bool> DeleteAsync(int id);
+    Task<bool> ExistsAsync(int id);
+}

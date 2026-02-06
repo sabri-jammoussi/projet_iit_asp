@@ -1,0 +1,14 @@
+﻿namespace Back.Commun.Security;
+
+/// <summary>
+/// Configuration POCO for JWT token settings.
+/// Bind from appsettings.json section "JwtTokenSettings".
+/// </summary>
+public class JwtSettings
+{
+    public string ValidIssuer { get; set; } = string.Empty;
+    public string ValidAudience { get; set; } = string.Empty;
+    public string SymmetricSecurityKey { get; set; } = string.Empty;
+    public string JwtRegisteredClaimNamesSub { get; set; } = string.Empty;
+    public int ExpirationMinutes { get; set; } = 150;
+}

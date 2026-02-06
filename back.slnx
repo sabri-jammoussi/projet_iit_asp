@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Commun/">
+    <Project Path="Back.Commun/Back.Commun.csproj" />
+  </Folder>
+  <Folder Name="/Data/">
+    <Project Path="Back.Data/Back.Data.csproj" />
+  </Folder>
+  <Project Path="back/back.csproj" />
+</Solution>

@@ -1,0 +1,18 @@
+﻿using back.Entities.Oltp;
+
+namespace back.Repositories.Interfaces;
+
+/// <summary>
+/// Repository interface for Order entity.
+/// Defines data access operations for Orders.
+/// </summary>
+public interface IOrderRepository
+{
+    Task<IEnumerable<Order>> GetAllAsync();
+    Task<Order?> GetByIdAsync(int id);
+    Task<IEnumerable<Order>> GetByCustomerIdAsync(int customerId);
+    Task<Order> AddAsync(Order order);
+    Task<Order> UpdateAsync(Order order);
+    Task<bool> DeleteAsync(int id);
+    Task<bool> ExistsAsync(int id);
+}

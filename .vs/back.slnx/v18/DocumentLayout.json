@@ -1,0 +1,313 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\projet_NET_ETL\\back\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|d:\\projet_net_etl\\back\\back\\repositories\\customer\\customerrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|solutionrelative:back\\repositories\\customer\\customerrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|d:\\projet_net_etl\\back\\back\\services\\implementations\\customerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|solutionrelative:back\\services\\implementations\\customerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|d:\\projet_net_etl\\back\\back\\services\\interfaces\\icustomerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|solutionrelative:back\\services\\interfaces\\icustomerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|d:\\projet_net_etl\\back\\back\\controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|solutionrelative:back\\controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|d:\\projet_net_etl\\back\\back\\models\\authentification\\registrationrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|solutionrelative:back\\models\\authentification\\registrationrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|d:\\projet_net_etl\\back\\back\\models\\authentification\\authresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|solutionrelative:back\\models\\authentification\\authresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|d:\\projet_net_etl\\back\\back\\models\\authentification\\authrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|solutionrelative:back\\models\\authentification\\authrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|d:\\projet_net_etl\\back\\back\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|solutionrelative:back\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|d:\\projet_net_etl\\back\\back\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|solutionrelative:back\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF1C6562-234B-F3D8-27CA-2CAA1A508A1F}|Back.Commun\\Back.Commun.csproj|d:\\projet_net_etl\\back\\back.commun\\security\\emailvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF1C6562-234B-F3D8-27CA-2CAA1A508A1F}|Back.Commun\\Back.Commun.csproj|solutionrelative:back.commun\\security\\emailvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF1C6562-234B-F3D8-27CA-2CAA1A508A1F}|Back.Commun\\Back.Commun.csproj|d:\\projet_net_etl\\back\\back.commun\\security\\iemailvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF1C6562-234B-F3D8-27CA-2CAA1A508A1F}|Back.Commun\\Back.Commun.csproj|solutionrelative:back.commun\\security\\iemailvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{266AB432-8D40-AD9F-34AE-72BEFD4ADFF8}|Back.Data\\Back.Data.csproj|d:\\projet_net_etl\\back\\back.data\\infrastructure\\ef\\enums\\userrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{266AB432-8D40-AD9F-34AE-72BEFD4ADFF8}|Back.Data\\Back.Data.csproj|solutionrelative:back.data\\infrastructure\\ef\\enums\\userrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{266AB432-8D40-AD9F-34AE-72BEFD4ADFF8}|Back.Data\\Back.Data.csproj|d:\\projet_net_etl\\back\\back.data\\infrastructure\\ef\\oltpdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{266AB432-8D40-AD9F-34AE-72BEFD4ADFF8}|Back.Data\\Back.Data.csproj|solutionrelative:back.data\\infrastructure\\ef\\oltpdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{266AB432-8D40-AD9F-34AE-72BEFD4ADFF8}|Back.Data\\Back.Data.csproj|d:\\projet_net_etl\\back\\back.data\\infrastructure\\ef\\models\\accountdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{266AB432-8D40-AD9F-34AE-72BEFD4ADFF8}|Back.Data\\Back.Data.csproj|solutionrelative:back.data\\infrastructure\\ef\\models\\accountdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|d:\\projet_net_etl\\back\\back\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|solutionrelative:back\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|d:\\projet_net_etl\\back\\back\\back.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|solutionrelative:back\\back.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|d:\\projet_net_etl\\back\\back\\repositories\\order\\orderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|solutionrelative:back\\repositories\\order\\orderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CustomerService.cs",
+              "DocumentMoniker": "D:\\projet_NET_ETL\\back\\back\\Services\\Implementations\\CustomerService.cs",
+              "RelativeDocumentMoniker": "back\\Services\\Implementations\\CustomerService.cs",
+              "ToolTip": "D:\\projet_NET_ETL\\back\\back\\Services\\Implementations\\CustomerService.cs",
+              "RelativeToolTip": "back\\Services\\Implementations\\CustomerService.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAIwBYAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-02T18:08:12.181Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CustomerRepository.cs",
+              "DocumentMoniker": "D:\\projet_NET_ETL\\back\\back\\Repositories\\Customer\\CustomerRepository.cs",
+              "RelativeDocumentMoniker": "back\\Repositories\\Customer\\CustomerRepository.cs",
+              "ToolTip": "D:\\projet_NET_ETL\\back\\back\\Repositories\\Customer\\CustomerRepository.cs",
+              "RelativeToolTip": "back\\Repositories\\Customer\\CustomerRepository.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAowDkAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-02T18:08:12.199Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "RegistrationRequest.cs",
+              "DocumentMoniker": "D:\\projet_NET_ETL\\back\\back\\Models\\Authentification\\RegistrationRequest.cs",
+              "RelativeDocumentMoniker": "back\\Models\\Authentification\\RegistrationRequest.cs",
+              "ToolTip": "D:\\projet_NET_ETL\\back\\back\\Models\\Authentification\\RegistrationRequest.cs",
+              "RelativeToolTip": "back\\Models\\Authentification\\RegistrationRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T20:39:11.041Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AuthResponse.cs",
+              "DocumentMoniker": "D:\\projet_NET_ETL\\back\\back\\Models\\Authentification\\AuthResponse.cs",
+              "RelativeDocumentMoniker": "back\\Models\\Authentification\\AuthResponse.cs",
+              "ToolTip": "D:\\projet_NET_ETL\\back\\back\\Models\\Authentification\\AuthResponse.cs",
+              "RelativeToolTip": "back\\Models\\Authentification\\AuthResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T20:39:03.544Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AuthRequest.cs",
+              "DocumentMoniker": "D:\\projet_NET_ETL\\back\\back\\Models\\Authentification\\AuthRequest.cs",
+              "RelativeDocumentMoniker": "back\\Models\\Authentification\\AuthRequest.cs",
+              "ToolTip": "D:\\projet_NET_ETL\\back\\back\\Models\\Authentification\\AuthRequest.cs",
+              "RelativeToolTip": "back\\Models\\Authentification\\AuthRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T20:38:56.429Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CustomerController.cs",
+              "DocumentMoniker": "D:\\projet_NET_ETL\\back\\back\\Controllers\\CustomerController.cs",
+              "RelativeDocumentMoniker": "back\\Controllers\\CustomerController.cs",
+              "ToolTip": "D:\\projet_NET_ETL\\back\\back\\Controllers\\CustomerController.cs",
+              "RelativeToolTip": "back\\Controllers\\CustomerController.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAzwBoAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-31T17:20:50.585Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ICustomerService.cs",
+              "DocumentMoniker": "D:\\projet_NET_ETL\\back\\back\\Services\\Interfaces\\ICustomerService.cs",
+              "RelativeDocumentMoniker": "back\\Services\\Interfaces\\ICustomerService.cs",
+              "ToolTip": "D:\\projet_NET_ETL\\back\\back\\Services\\Interfaces\\ICustomerService.cs",
+              "RelativeToolTip": "back\\Services\\Interfaces\\ICustomerService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAYAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-31T17:19:32.357Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "D:\\projet_NET_ETL\\back\\back\\Services\\AuthService.cs",
+              "RelativeDocumentMoniker": "back\\Services\\AuthService.cs",
+              "ToolTip": "D:\\projet_NET_ETL\\back\\back\\Services\\AuthService.cs",
+              "RelativeToolTip": "back\\Services\\AuthService.cs",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAYwFoAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T20:37:46.181Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "D:\\projet_NET_ETL\\back\\back\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "back\\Controllers\\AuthController.cs",
+              "ToolTip": "D:\\projet_NET_ETL\\back\\back\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "back\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAQwCAAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T20:37:25.755Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "EmailValidator.cs",
+              "DocumentMoniker": "D:\\projet_NET_ETL\\back\\Back.Commun\\Security\\EmailValidator.cs",
+              "RelativeDocumentMoniker": "Back.Commun\\Security\\EmailValidator.cs",
+              "ToolTip": "D:\\projet_NET_ETL\\back\\Back.Commun\\Security\\EmailValidator.cs",
+              "RelativeToolTip": "Back.Commun\\Security\\EmailValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T20:36:49.48Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "IEmailValidator.cs",
+              "DocumentMoniker": "D:\\projet_NET_ETL\\back\\Back.Commun\\Security\\IEmailValidator.cs",
+              "RelativeDocumentMoniker": "Back.Commun\\Security\\IEmailValidator.cs",
+              "ToolTip": "D:\\projet_NET_ETL\\back\\Back.Commun\\Security\\IEmailValidator.cs",
+              "RelativeToolTip": "Back.Commun\\Security\\IEmailValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T20:36:47.896Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "UserRole.cs",
+              "DocumentMoniker": "D:\\projet_NET_ETL\\back\\Back.Data\\Infrastructure\\EF\\Enums\\UserRole.cs",
+              "RelativeDocumentMoniker": "Back.Data\\Infrastructure\\EF\\Enums\\UserRole.cs",
+              "ToolTip": "D:\\projet_NET_ETL\\back\\Back.Data\\Infrastructure\\EF\\Enums\\UserRole.cs",
+              "RelativeToolTip": "Back.Data\\Infrastructure\\EF\\Enums\\UserRole.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T20:35:04.044Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "OltpDbContext.cs",
+              "DocumentMoniker": "D:\\projet_NET_ETL\\back\\Back.Data\\Infrastructure\\EF\\OltpDbContext.cs",
+              "RelativeDocumentMoniker": "Back.Data\\Infrastructure\\EF\\OltpDbContext.cs",
+              "ToolTip": "D:\\projet_NET_ETL\\back\\Back.Data\\Infrastructure\\EF\\OltpDbContext.cs",
+              "RelativeToolTip": "Back.Data\\Infrastructure\\EF\\OltpDbContext.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAgwD4AAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T20:34:54.76Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "AccountDao.cs",
+              "DocumentMoniker": "D:\\projet_NET_ETL\\back\\Back.Data\\Infrastructure\\EF\\Models\\AccountDao.cs",
+              "RelativeDocumentMoniker": "Back.Data\\Infrastructure\\EF\\Models\\AccountDao.cs",
+              "ToolTip": "D:\\projet_NET_ETL\\back\\Back.Data\\Infrastructure\\EF\\Models\\AccountDao.cs",
+              "RelativeToolTip": "Back.Data\\Infrastructure\\EF\\Models\\AccountDao.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T20:34:46.357Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "back",
+              "DocumentMoniker": "D:\\projet_NET_ETL\\back\\back\\back.csproj",
+              "RelativeDocumentMoniker": "back\\back.csproj",
+              "ToolTip": "D:\\projet_NET_ETL\\back\\back\\back.csproj",
+              "RelativeToolTip": "back\\back.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-02-02T18:11:03.691Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\projet_NET_ETL\\back\\back\\Program.cs",
+              "RelativeDocumentMoniker": "back\\Program.cs",
+              "ToolTip": "D:\\projet_NET_ETL\\back\\back\\Program.cs",
+              "RelativeToolTip": "back\\Program.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAqwG0AAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-02T18:04:45.587Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "OrderRepository.cs",
+              "DocumentMoniker": "D:\\projet_NET_ETL\\back\\back\\Repositories\\Order\\OrderRepository.cs",
+              "RelativeDocumentMoniker": "back\\Repositories\\Order\\OrderRepository.cs",
+              "ToolTip": "D:\\projet_NET_ETL\\back\\back\\Repositories\\Order\\OrderRepository.cs",
+              "RelativeToolTip": "back\\Repositories\\Order\\OrderRepository.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAkwDcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-31T17:18:48.823Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

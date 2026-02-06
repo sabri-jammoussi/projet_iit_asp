@@ -1,0 +1,14 @@
+D:\projet_NET_ETL\back\Back.Data\bin\Debug\net10.0\Back.Data.deps.json
+D:\projet_NET_ETL\back\Back.Data\bin\Debug\net10.0\Back.Data.runtimeconfig.json
+D:\projet_NET_ETL\back\Back.Data\bin\Debug\net10.0\Back.Data.dll
+D:\projet_NET_ETL\back\Back.Data\bin\Debug\net10.0\Back.Data.pdb
+D:\projet_NET_ETL\back\Back.Data\obj\Debug\net10.0\Back.Data.csproj.AssemblyReference.cache
+D:\projet_NET_ETL\back\Back.Data\obj\Debug\net10.0\Back.Data.GeneratedMSBuildEditorConfig.editorconfig
+D:\projet_NET_ETL\back\Back.Data\obj\Debug\net10.0\Back.Data.AssemblyInfoInputs.cache
+D:\projet_NET_ETL\back\Back.Data\obj\Debug\net10.0\Back.Data.AssemblyInfo.cs
+D:\projet_NET_ETL\back\Back.Data\obj\Debug\net10.0\Back.Data.csproj.CoreCompileInputs.cache
+D:\projet_NET_ETL\back\Back.Data\obj\Debug\net10.0\Back.Data.dll
+D:\projet_NET_ETL\back\Back.Data\obj\Debug\net10.0\refint\Back.Data.dll
+D:\projet_NET_ETL\back\Back.Data\obj\Debug\net10.0\Back.Data.pdb
+D:\projet_NET_ETL\back\Back.Data\obj\Debug\net10.0\Back.Data.genruntimeconfig.cache
+D:\projet_NET_ETL\back\Back.Data\obj\Debug\net10.0\ref\Back.Data.dll

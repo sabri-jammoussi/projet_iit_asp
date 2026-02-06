@@ -1,0 +1,150 @@
+﻿using System.Text;
+using back.Repositories.Customer;
+using back.Repositories.Order;
+using back.Repositories.OrderDetail;
+using back.Repositories.Product;
+using back.Services;
+using back.Services.Implementations;
+using back.Services.Interfaces;
+using Back.Commun.Security;
+using Back.Data.Infrastructure.EF;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi;
+
+namespace back;
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
+
+        // JWT Configuration
+        var validIssuer = builder.Configuration.GetValue<string>("JwtTokenSettings:ValidIssuer");
+        var validAudience = builder.Configuration.GetValue<string>("JwtTokenSettings:ValidAudience");
+        var symmetricSecurityKey = builder.Configuration.GetValue<string>("JwtTokenSettings:SymmetricSecurityKey");
+
+        if (string.IsNullOrWhiteSpace(symmetricSecurityKey))
+        {
+            throw new InvalidOperationException("Configuration manquante: 'JwtTokenSettings:SymmetricSecurityKey' est vide.");
+        }
+
+        // Add services to the container
+        builder.Services.AddControllers();
+        builder.Services.AddAuthorization();
+        builder.Services.AddEndpointsApiExplorer();
+
+        // Swagger with JWT Bearer authentication
+        builder.Services.AddSwaggerGen(option =>
+        {
+            option.EnableAnnotations();
+            option.SwaggerDoc("v1", new OpenApiInfo { Title = "Test API", Version = "v1" });
+            option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            {
+                In = ParameterLocation.Header,
+                Description = "Please enter a valid token",
+                Name = "Authorization",
+                Type = SecuritySchemeType.Http,
+                BearerFormat = "JWT",
+                Scheme = "Bearer"
+            });
+			option.AddSecurityRequirement(document => new OpenApiSecurityRequirement
+			{
+				[new OpenApiSecuritySchemeReference("Bearer", document)] = []
+			});
+
+		});
+
+        // Database
+        builder.Services.AddDbContext<OltpDbContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("UsersConnections")));
+
+        // JWT Authentication
+        builder.Services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+        .AddJwtBearer(options =>
+        {
+            options.IncludeErrorDetails = true;
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ClockSkew = TimeSpan.FromMinutes(5),
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = validIssuer,
+                ValidAudience = validAudience,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(symmetricSecurityKey))
+            };
+            
+            // Log authentication failures for debugging
+            options.Events = new JwtBearerEvents
+            {
+                OnMessageReceived = context =>
+                {
+                    var token = context.Request.Headers["Authorization"].FirstOrDefault();
+                    Console.WriteLine($"Token received: {token}");
+                    return Task.CompletedTask;
+                },
+                OnAuthenticationFailed = context =>
+                {
+                    Console.WriteLine($"Authentication failed: {context.Exception.Message}");
+                    return Task.CompletedTask;
+                }
+            };
+        });
+
+        // Security services
+        builder.Services.AddScoped<TokenService>();
+        builder.Services.AddScoped<PasswordHasherProvider>();
+        builder.Services.AddScoped<EmailValidator>();
+        builder.Services.AddScoped<PasswordValidator>();
+
+        // Auth service
+        builder.Services.AddScoped<AuthService>();
+
+        // Repositories
+        builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+        builder.Services.AddScoped<IProductRepository, ProductRepository>();
+        builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+        builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
+
+        // Services
+        builder.Services.AddScoped<ICustomerService, CustomerService>();
+
+        var app = builder.Build();
+
+        // Configure the HTTP request pipeline
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+        }
+
+        app.UseHttpsRedirection();
+        app.UseAuthentication();
+        app.UseAuthorization();
+        app.MapControllers();
+
+        // Auto-migrate database
+        try
+        {
+            using var scope = app.Services.CreateScope();
+            using var dbContext = scope.ServiceProvider.GetService<OltpDbContext>();
+            dbContext?.Database.Migrate();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+        }
+
+        app.Run();
+    }
+}
