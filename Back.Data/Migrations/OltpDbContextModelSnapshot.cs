@@ -67,6 +67,18 @@ namespace Back.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ACCOUNT");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "Admin@Admin.tn",
+                            FirstName = "Admin",
+                            LastName = "Admin",
+                            PasswordHash = new byte[] { 129, 164, 223, 120, 195, 92, 99, 136, 236, 187, 14, 255, 77, 29, 211, 121, 13, 179, 3, 115, 236, 254, 51, 116, 89, 114, 105, 117, 72, 10, 237, 177, 116, 178, 97, 6, 164, 41, 211, 181, 14, 23, 219, 252, 178, 185, 200, 78, 231, 25, 79, 62, 87, 10, 34, 32, 6, 82, 254, 105, 34, 245, 238, 247 },
+                            PasswordSalt = new byte[] { 249, 57, 186, 187, 152, 62, 234, 69, 141, 26, 180, 39, 49, 166, 60, 235 },
+                            Role = (short)1
+                        });
                 });
 
             modelBuilder.Entity("Back.Data.Infrastructure.EF.Models.CustomerDao", b =>
@@ -77,6 +89,10 @@ namespace Back.Data.Migrations
                         .HasColumnName("C_ID");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AccountId")
+                        .HasColumnType("int")
+                        .HasColumnName("A_ID");
 
                     b.Property<string>("Address")
                         .HasMaxLength(200)
@@ -121,6 +137,10 @@ namespace Back.Data.Migrations
                         .HasColumnName("C_PHONE");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AccountId")
+                        .IsUnique()
+                        .HasDatabaseName("IX_CUSTOMER_ACCOUNT_ID");
 
                     b.ToTable("CUSTOMER");
                 });
@@ -179,7 +199,7 @@ namespace Back.Data.Migrations
 
                     b.Property<int>("OrderId")
                         .HasColumnType("int")
-                        .HasColumnName("OD_ORDER_ID");
+                        .HasColumnName("O_ID");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int")
@@ -244,6 +264,74 @@ namespace Back.Data.Migrations
                     b.ToTable("PRODUCT");
                 });
 
+            modelBuilder.Entity("Notification.Models.NotificationDao", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("N_ID");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("N_CREATED_AT");
+
+                    b.Property<string>("CustomerEmail")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("N_CUSTOMER_EMAIL");
+
+                    b.Property<int?>("CustomerId")
+                        .HasColumnType("int")
+                        .HasColumnName("N_CUSTOMER_ID");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit")
+                        .HasColumnName("N_IS_READ");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)")
+                        .HasColumnName("N_MESSAGE");
+
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int")
+                        .HasColumnName("N_ORDER_ID");
+
+                    b.Property<DateTime?>("SentAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("N_SENT_AT");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
+                        .HasColumnName("N_TITLE");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("N_TYPE");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NOTIFICATION");
+                });
+
+            modelBuilder.Entity("Back.Data.Infrastructure.EF.Models.CustomerDao", b =>
+                {
+                    b.HasOne("Back.Data.Infrastructure.EF.Models.AccountDao", "Account")
+                        .WithOne("Customer")
+                        .HasForeignKey("Back.Data.Infrastructure.EF.Models.CustomerDao", "AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Account");
+                });
+
             modelBuilder.Entity("Back.Data.Infrastructure.EF.Models.OrderDao", b =>
                 {
                     b.HasOne("Back.Data.Infrastructure.EF.Models.CustomerDao", "Customer")
@@ -272,6 +360,11 @@ namespace Back.Data.Migrations
                     b.Navigation("Order");
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("Back.Data.Infrastructure.EF.Models.AccountDao", b =>
+                {
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("Back.Data.Infrastructure.EF.Models.CustomerDao", b =>

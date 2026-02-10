@@ -17,6 +17,4 @@ public class RegistrationRequest
 
     [Required]
     public required string Password { get; set; }
-
-    public UserRole Role { get; set; }
 }

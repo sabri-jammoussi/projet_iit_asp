@@ -7,19 +7,8 @@
       "RelativeMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|solutionrelative:back\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Sabri Jammoussi\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\-1275588444\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|d:\\projet_net_etl\\back\\back\\repositories\\order\\orderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|solutionrelative:back\\repositories\\order\\orderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|d:\\projet_net_etl\\back\\back\\services\\interfaces\\icustomerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|solutionrelative:back\\services\\interfaces\\icustomerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|d:\\projet_net_etl\\back\\back\\controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|solutionrelative:back\\controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|d:\\projet_net_etl\\back\\back\\back.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{ED405EA1-F4A9-EFF6-99C5-351D1885B05D}|back\\back.csproj|solutionrelative:back\\back.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -43,59 +32,22 @@
               "RelativeDocumentMoniker": "back\\Program.cs",
               "ToolTip": "D:\\projet_NET_ETL\\back\\back\\Program.cs",
               "RelativeToolTip": "back\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKkAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAKEAAAAAAAAAAAAiwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-02T18:04:45.587Z",
+              "WhenOpened": "2026-02-10T19:49:29.251Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Sabri Jammoussi\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\-1275588444\\Program.cs",
-              "ToolTip": "C:\\Users\\Sabri Jammoussi\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\-1275588444\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-02T18:04:15.241Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "OrderRepository.cs",
-              "DocumentMoniker": "D:\\projet_NET_ETL\\back\\back\\Repositories\\Order\\OrderRepository.cs",
-              "RelativeDocumentMoniker": "back\\Repositories\\Order\\OrderRepository.cs",
-              "ToolTip": "D:\\projet_NET_ETL\\back\\back\\Repositories\\Order\\OrderRepository.cs",
-              "RelativeToolTip": "back\\Repositories\\Order\\OrderRepository.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAAAkwDcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-31T17:18:48.823Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "CustomerController.cs",
-              "DocumentMoniker": "D:\\projet_NET_ETL\\back\\back\\Controllers\\CustomerController.cs",
-              "RelativeDocumentMoniker": "back\\Controllers\\CustomerController.cs",
-              "ToolTip": "D:\\projet_NET_ETL\\back\\back\\Controllers\\CustomerController.cs",
-              "RelativeToolTip": "back\\Controllers\\CustomerController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-31T17:20:50.585Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ICustomerService.cs",
-              "DocumentMoniker": "D:\\projet_NET_ETL\\back\\back\\Services\\Interfaces\\ICustomerService.cs",
-              "RelativeDocumentMoniker": "back\\Services\\Interfaces\\ICustomerService.cs",
-              "ToolTip": "D:\\projet_NET_ETL\\back\\back\\Services\\Interfaces\\ICustomerService.cs",
-              "RelativeToolTip": "back\\Services\\Interfaces\\ICustomerService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-31T17:19:32.357Z",
+              "Title": "back",
+              "DocumentMoniker": "D:\\projet_NET_ETL\\back\\back\\back.csproj",
+              "RelativeDocumentMoniker": "back\\back.csproj",
+              "ToolTip": "D:\\projet_NET_ETL\\back\\back\\back.csproj",
+              "RelativeToolTip": "back\\back.csproj",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAawAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-02-10T19:48:38.354Z",
               "EditorCaption": ""
             }
           ]

@@ -1,0 +1,90 @@
+# Visual Studio / Rider / VSCode
+.vs/
+.idea/
+.vscode/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build outputs
+bin/
+obj/
+**/bin/
+**/obj/
+
+# Publish outputs
+publish/
+**/publish/
+
+# NuGet
+.nuget/
+*.nupkg
+project.lock.json
+packages/
+
+# Dotnet
+*.dbmdl
+*.dbproj.user
+
+# Logs
+logs/
+*.log
+
+# Generated files
+**/*.g.cs
+**/*.g.i.cs
+**/*sourcelink.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*~
+*.tmp
+*.temp
+
+# Resharper
+_ReSharper*/
+*.DotSettings.user
+
+# Rider caches
+.idea/
+
+# User secrets
+secrets.json
+
+# EF Migrations build artifacts
+**/Migrations/**/obj/
+
+# Test results
+TestResults/
+*.trx
+
+# Hangfire and other runtime files
+hangfire.*
+
+# Logs from local runs
+logs/**
+
+# VS Code settings
+.vscode/
+
+# Ignore publish output of IISExpress
+iisexpress/**
+
+# Ignore specific workspace files
+back/bin/
+back/obj/
+Notification/bin/
+Notification/obj/
+Gateway/bin/
+Gateway/obj/
+
+# JetBrains Rider
+.idea/
+
+# End of file

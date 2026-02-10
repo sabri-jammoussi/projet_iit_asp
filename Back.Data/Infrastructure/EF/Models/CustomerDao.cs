@@ -11,6 +11,11 @@ public class CustomerDao
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
+    // FK to Account (one-to-one)
+    [Required]
+    [Column("A_ID")]
+    public int AccountId { get; set; }
+
     [Required]
     [StringLength(50)]
     [Column("C_FIRSTNAME")]
@@ -47,4 +52,7 @@ public class CustomerDao
 
     // Navigation property: One Customer -> Many Orders
     public virtual ICollection<OrderDao> Orders { get; set; } = new List<OrderDao>();
+
+	[ForeignKey(nameof(AccountId))]
+	public virtual AccountDao? Account { get; set; }
 }

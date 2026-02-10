@@ -12,17 +12,20 @@ public class AccountDao
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
+    [Required]
     [StringLength(30)]
     [Column("A_FIRSTNAME")]
-    public required string FirstName { get; set; }
+    public string FirstName { get; set; } = string.Empty;
 
+    [Required]
     [StringLength(30)]
     [Column("A_LASTNAME")]
-    public required string LastName { get; set; }
+    public string LastName { get; set; } = string.Empty;
 
+    [Required]
     [StringLength(30)]
     [Column("A_EMAIL")]
-    public required string Email { get; set; }
+    public string Email { get; set; } = string.Empty;
 
     [Column("A_PASSWORD_HASH")]
     public byte[]? PasswordHash { get; set; }
@@ -33,4 +36,7 @@ public class AccountDao
     [EnumDataType(typeof(UserRole))]
     [Column("A_ROLE")]
     public UserRole Role { get; set; }
+
+    // Navigation property: One Account -> One Customer (only for Client role)
+    public virtual CustomerDao? Customer { get; set; }
 }
