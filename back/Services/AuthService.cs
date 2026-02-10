@@ -55,42 +55,79 @@ public class AuthService
         // Generate password hash and salt
         _passwordHasherProvider.CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
-        var newUser = new AccountDao
+        // Use transaction to ensure both Account and Customer are created together
+        await using var transaction = await _dbContext.Database.BeginTransactionAsync();
+
+        try
         {
-            FirstName = request.FirstName,
-            LastName = request.LastName,
-            Email = request.Email,
-            PasswordHash = passwordHash,
-            PasswordSalt = passwordSalt,
-            Role = UserRole.Client,
-        };
+            // Create Account
+            var newAccount = new AccountDao
+            {
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                Email = request.Email,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
+                Role = UserRole.Client // Default role is Client
+            };
 
-        _dbContext.Accounts.Add(newUser);
-        await _dbContext.SaveChangesAsync();
+            _dbContext.Accounts.Add(newAccount);
+            await _dbContext.SaveChangesAsync();
 
-        return new OkResult();
+            // If role is Client, create Customer profile
+            if (newAccount.Role == UserRole.Client)
+            {
+                var newCustomer = new CustomerDao
+                {
+                    AccountId = newAccount.Id,
+                    FirstName = request.FirstName,
+                    LastName = request.LastName,
+                    Email = request.Email,
+                    CreatedAt = DateTime.UtcNow
+                };
+
+                _dbContext.Customers.Add(newCustomer);
+                await _dbContext.SaveChangesAsync();
+
+                _logger.LogInformation("Customer profile created for Account {AccountId}", newAccount.Id);
+            }
+
+            await transaction.CommitAsync();
+
+            _logger.LogInformation("User registered successfully with ID {AccountId}", newAccount.Id);
+            return new OkResult();
+        }
+        catch (Exception ex)
+        {
+            await transaction.RollbackAsync();
+            _logger.LogError(ex, "Failed to register user");
+            throw;
+        }
     }
 
     public async Task<ActionResult<AuthResponse>> Login(AuthRequest request)
     {
         // Check if the user exists in the database
-        var userInDb = await _dbContext.Accounts.FirstOrDefaultAsync(u => u.Email == request.Email);
+        var userInDb = await _dbContext.Accounts
+            .Include(a => a.Customer)
+            .FirstOrDefaultAsync(u => u.Email == request.Email);
+
         if (userInDb is null)
-            throw new Exception("Email ou Mot de passe invalid !");
+            throw new InvalidOperationException("Email ou Mot de passe invalid !");
 
         if (userInDb.PasswordHash is null || userInDb.PasswordSalt is null)
-            throw new Exception("Email ou Mot de passe invalid !");
+            throw new InvalidOperationException("Email ou Mot de passe invalid !");
 
         if (!_passwordHasherProvider.VerifyPasswordHash(request.Password, userInDb.PasswordHash, userInDb.PasswordSalt))
-            throw new Exception("Email ou Mot de passe invalid !");
+            throw new InvalidOperationException("Email ou Mot de passe invalid !");
 
         var accessToken = _tokenService.CreateToken(userInDb);
 
-        var response = new AuthResponse
-        {
-            Token = accessToken,
-        };
+        _logger.LogInformation("User {Email} logged in successfully", request.Email);
 
-        return response;
+        return new AuthResponse
+        {
+            Token = accessToken
+        };
     }
 }

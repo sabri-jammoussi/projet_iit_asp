@@ -5,5 +5,10 @@
   <Folder Name="/Data/">
     <Project Path="Back.Data/Back.Data.csproj" />
   </Folder>
+  <Folder Name="/Notification/">
+    <Project Path="Notification.Core/Notification.Core.csproj" Id="83c26198-4eea-4132-997b-84aef8aca0ff" />
+    <Project Path="Notification/Notification.csproj" Id="4992667a-be42-4505-aba1-202f600efe78" />
+  </Folder>
   <Project Path="back/back.csproj" />
+  <Project Path="Gateway/Gateway.csproj" Id="e9ea11f9-0a38-434f-bd8d-5fab0e2137f6" />
 </Solution>

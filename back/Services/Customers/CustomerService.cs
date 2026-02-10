@@ -2,9 +2,8 @@ using back.DTOs;
 using Back.Data.Infrastructure.EF.Models;
 using back.Repositories.Customer;
 using System.Linq;
-using back.Services.Interfaces;
 
-namespace back.Services.Implementations;
+namespace back.Services.Customers;
 
 public class CustomerService : ICustomerService
 {

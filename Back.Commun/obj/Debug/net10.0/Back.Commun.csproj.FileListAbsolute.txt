@@ -8,6 +8,7 @@ D:\projet_NET_ETL\back\Back.Commun\obj\Debug\net10.0\Back.Commun.GeneratedMSBuil
 D:\projet_NET_ETL\back\Back.Commun\obj\Debug\net10.0\Back.Commun.AssemblyInfoInputs.cache
 D:\projet_NET_ETL\back\Back.Commun\obj\Debug\net10.0\Back.Commun.AssemblyInfo.cs
 D:\projet_NET_ETL\back\Back.Commun\obj\Debug\net10.0\Back.Commun.csproj.CoreCompileInputs.cache
+D:\projet_NET_ETL\back\Back.Commun\obj\Debug\net10.0\Back.Commun.sourcelink.json
 D:\projet_NET_ETL\back\Back.Commun\obj\Debug\net10.0\Back.Com.384007BE.Up2Date
 D:\projet_NET_ETL\back\Back.Commun\obj\Debug\net10.0\Back.Commun.dll
 D:\projet_NET_ETL\back\Back.Commun\obj\Debug\net10.0\refint\Back.Commun.dll

@@ -1,8 +1,13 @@
-﻿using Back.Data.Infrastructure.EF.Models;
+﻿using System.Collections.Generic;
+using System.Security.Cryptography;
+using System.Text;
+using Back.Data.Infrastructure.EF.Enums;
+using Back.Data.Infrastructure.EF.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Notification.Models;
 
 namespace Back.Data.Infrastructure.EF;
 
@@ -34,6 +39,19 @@ public class OltpDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
+        // Account -> Customer (One-to-One, optional)
+        modelBuilder.Entity<AccountDao>()
+            .HasOne(a => a.Customer)
+            .WithOne(c => c.Account)
+            .HasForeignKey<CustomerDao>(c => c.AccountId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        // Unique index on Customer.AccountId (one account = one customer)
+        modelBuilder.Entity<CustomerDao>()
+            .HasIndex(c => c.AccountId)
+            .IsUnique()
+            .HasDatabaseName("IX_CUSTOMER_ACCOUNT_ID");
+
         // Customer -> Orders (One-to-Many)
         modelBuilder.Entity<CustomerDao>()
             .HasMany(c => c.Orders)
@@ -54,14 +72,51 @@ public class OltpDbContext : DbContext
             .WithOne(od => od.Product)
             .HasForeignKey(od => od.ProductId)
             .OnDelete(DeleteBehavior.Restrict);
-    }
+		#region seeds
+		var hasher = new PasswordHasherX();
 
-    // Authentication
-    public DbSet<AccountDao> Accounts { get; set; }
+		var salt = Guid.Parse("bbba39f9-3e98-45ea-8d1a-b42731a63ceb").ToByteArray();
+		var hash = hasher.Hash("123456", salt);
+		modelBuilder.Entity<AccountDao>().HasData(new AccountDao
+		{
+			Id = 1,
+			FirstName = "Admin",
+			LastName = "Admin",
+			Email = "Admin@Admin.tn",
+			// PasswordHash and PasswordSalt can be null for seed if you don't need to login as this user immediately.
+			PasswordHash = hash,
+			PasswordSalt = salt,
+			Role = UserRole.Admin
+		});
+
+		#endregion
+	}
+
+	// Authentication
+	public DbSet<AccountDao> Accounts { get; set; }
 
     // OLTP Entities
     public DbSet<CustomerDao> Customers { get; set; }
     public DbSet<ProductDao> Products { get; set; }
     public DbSet<OrderDao> Orders { get; set; }
     public DbSet<OrderDetailDao> OrderDetails { get; set; }
+	public DbSet<NotificationDao> Notifications { get; set; }
+
+
+	
+}
+public class PasswordHasherX
+{
+	private readonly HMACSHA512 x = new HMACSHA512(Encoding.UTF8.GetBytes("realworld"));
+
+	public byte[] Hash(string password, byte[] salt)
+	{
+		var bytes = Encoding.UTF8.GetBytes(password);
+
+		var allBytes = new byte[bytes.Length + salt.Length];
+		Buffer.BlockCopy(bytes, 0, allBytes, 0, bytes.Length);
+		Buffer.BlockCopy(salt, 0, allBytes, bytes.Length, salt.Length);
+
+		return x.ComputeHash(allBytes);
+	}
 }

@@ -22,17 +22,23 @@ public class CustomerRepository : ICustomerRepository
 
     public async Task<CustomerDao?> GetByIdAsync(int id)
     {
-        var customerById = await _dbContext.Customers
+        return await _dbContext.Customers
             .Include(c => c.Orders)
+            .Include(c => c.Account)
             .FirstOrDefaultAsync(c => c.Id == id);
-        return customerById;
+    }
+
+    public async Task<CustomerDao?> GetByAccountIdAsync(int accountId)
+    {
+        return await _dbContext.Customers
+            .Include(c => c.Orders)
+            .FirstOrDefaultAsync(c => c.AccountId == accountId);
     }
 
     public async Task<CustomerDao?> GetByEmailAsync(string email)
     {
-        var existingEmail = await _dbContext.Customers
+        return await _dbContext.Customers
             .FirstOrDefaultAsync(c => c.Email == email);
-        return existingEmail;
     }
 
     public async Task<CustomerDao> AddAsync(CustomerDao customer)
@@ -63,5 +69,10 @@ public class CustomerRepository : ICustomerRepository
     public async Task<bool> ExistsAsync(int id)
     {
         return await _dbContext.Customers.AnyAsync(c => c.Id == id);
+    }
+
+    public async Task<bool> ExistsByAccountIdAsync(int accountId)
+    {
+        return await _dbContext.Customers.AnyAsync(c => c.AccountId == accountId);
     }
 }

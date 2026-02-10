@@ -25,7 +25,7 @@ public class OrderDetailDao
 
     // Foreign key to Order
     [Required]
-    [Column("OD_ORDER_ID")]
+    [Column("O_ID")]
     public int OrderId { get; set; }
 
     // Navigation property: OrderDetail -> Order (Many-to-One)

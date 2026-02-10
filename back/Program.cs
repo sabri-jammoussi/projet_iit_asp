@@ -4,15 +4,18 @@ using back.Repositories.Order;
 using back.Repositories.OrderDetail;
 using back.Repositories.Product;
 using back.Services;
-using back.Services.Implementations;
-using back.Services.Interfaces;
+using back.Services.Customers;
 using Back.Commun.Security;
+using Back.Commun.Account;
 using Back.Data.Infrastructure.EF;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using back.Services.Orders;
+using Hangfire;
+using Hangfire.SqlServer;
 
 namespace back;
 
@@ -79,6 +82,25 @@ public class Program
         builder.Services.AddDbContext<OltpDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("UsersConnections")));
 
+        // Hangfire (background jobs)
+        var hangfireConn = builder.Configuration.GetConnectionString("UsersConnections") ?? builder.Configuration.GetConnectionString("UsersConnections");
+        builder.Services.AddHangfire(configuration => configuration
+            .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+            .UseSimpleAssemblyNameTypeSerializer()
+            .UseRecommendedSerializerSettings()
+            .UseSqlServerStorage(hangfireConn, new SqlServerStorageOptions
+            {
+                PrepareSchemaIfNecessary = true,
+                QueuePollInterval = TimeSpan.Zero,
+                CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+                SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+                UseRecommendedIsolationLevel = true,
+                DisableGlobalLocks = true
+            }));
+
+        // Add the Hangfire server to process jobs
+        builder.Services.AddHangfireServer();
+
         // JWT Authentication
         builder.Services.AddAuthentication(options =>
         {
@@ -107,7 +129,7 @@ public class Program
                 OnMessageReceived = context =>
                 {
                     var token = context.Request.Headers["Authorization"].FirstOrDefault();
-                    Console.WriteLine($"Token received: {token}");
+                   // Console.WriteLine($"Token received: {token}");
                     return Task.CompletedTask;
                 },
                 OnAuthenticationFailed = context =>
@@ -119,6 +141,13 @@ public class Program
         });
 
         builder.Services.AddAuthorization();
+
+        // HttpClient for Notification service
+        builder.Services.AddHttpClient("NotificationService", client =>
+        {
+            client.BaseAddress = new Uri("http://localhost:5555");
+            client.DefaultRequestHeaders.Add("Accept", "application/json");
+        });
 
         // Security services
         builder.Services.AddScoped<TokenService>();
@@ -137,8 +166,22 @@ public class Program
 
         // Services
         builder.Services.AddScoped<ICustomerService, CustomerService>();
+        builder.Services.AddScoped<IOrderService, OrderService>();
 
-        var app = builder.Build();
+        builder.Services.AddHttpContextAccessor();
+        // Current user provider (uses IHttpContextAccessor internally)
+        builder.Services.AddScoped<ICurrentUserProvider, CurrentUserProvider>();
+        // Keyed Hangfire storage and client for 'notif' queue
+        builder.Services.AddSingleton<JobStorage>(sp =>
+            new SqlServerStorage(hangfireConn, new SqlServerStorageOptions
+            {
+                PrepareSchemaIfNecessary = true,
+                QueuePollInterval = TimeSpan.FromMilliseconds(200)
+            }));
+
+        builder.Services.AddSingleton<IBackgroundJobClient>(sp =>
+            new BackgroundJobClient(sp.GetRequiredService<JobStorage>()));
+		var app = builder.Build();
 
         // Configure the HTTP request pipeline
         if (app.Environment.IsDevelopment())

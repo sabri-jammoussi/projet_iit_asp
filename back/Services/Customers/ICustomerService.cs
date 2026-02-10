@@ -1,6 +1,6 @@
 using back.DTOs;
 
-namespace back.Services.Interfaces;
+namespace back.Services.Customers;
 
 public interface ICustomerService
 {
