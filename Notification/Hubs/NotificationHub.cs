@@ -2,9 +2,6 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace Notification.Hubs;
 
-/// <summary>
-/// SignalR Hub for real-time notifications.
-/// </summary>
 public class NotificationHub : Hub
 {
     private readonly ILogger<NotificationHub> _logger;
@@ -38,18 +35,12 @@ public class NotificationHub : Hub
         await base.OnDisconnectedAsync(exception);
     }
 
-    /// <summary>
-    /// Join a specific group (e.g., for admins).
-    /// </summary>
     public async Task JoinGroup(string groupName)
     {
         await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
         _logger.LogInformation("ConnectionId {ConnectionId} joined group {GroupName}", Context.ConnectionId, groupName);
     }
 
-    /// <summary>
-    /// Leave a specific group.
-    /// </summary>
     public async Task LeaveGroup(string groupName)
     {
         await Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);

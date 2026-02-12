@@ -1,8 +1,5 @@
 namespace Notification.DTOs;
 
-/// <summary>
-/// DTO for creating a notification.
-/// </summary>
 public class CreateNotificationDto
 {
     public string Type { get; set; } = string.Empty;
@@ -14,9 +11,6 @@ public class CreateNotificationDto
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }
 
-/// <summary>
-/// DTO for returning notification data.
-/// </summary>
 public class NotificationDto
 {
     public int Id { get; set; }
@@ -30,3 +24,4 @@ public class NotificationDto
     public DateTime CreatedAt { get; set; }
     public DateTime? SentAt { get; set; }
 }
+

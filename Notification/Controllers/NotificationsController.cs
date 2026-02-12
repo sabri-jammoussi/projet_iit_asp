@@ -4,9 +4,6 @@ using Notification.Services;
 
 namespace Notification.Controllers;
 
-/// <summary>
-/// API Controller for Notifications.
-/// </summary>
 [ApiController]
 [Route("api/nf/[controller]")]
 public class NotificationsController : ControllerBase
@@ -20,9 +17,6 @@ public class NotificationsController : ControllerBase
         _logger = logger;
     }
 
-    /// <summary>
-    /// Create a new notification (called by back API).
-    /// </summary>
     [HttpPost]
     public async Task<ActionResult<NotificationDto>> Create([FromBody] CreateNotificationDto dto)
     {
@@ -44,9 +38,6 @@ public class NotificationsController : ControllerBase
         }
     }
 
-    /// <summary>
-    /// Get all notifications.
-    /// </summary>
     [HttpGet]
     public async Task<ActionResult<IList<NotificationDto>>> GetAll()
     {
@@ -54,30 +45,7 @@ public class NotificationsController : ControllerBase
         return Ok(notifications);
     }
 
-    /// <summary>
-    /// Get notifications by customer ID.
-    /// </summary>
-    [HttpGet("customer/{customerId}")]
-    public async Task<ActionResult<IList<NotificationDto>>> GetByCustomerId(int customerId)
-    {
-        var notifications = await _notificationService.GetByCustomerIdAsync(customerId);
-        return Ok(notifications);
-    }
-
-    /// <summary>
-    /// Get unread notifications.
-    /// </summary>
-    [HttpGet("unread")]
-    public async Task<ActionResult<IList<NotificationDto>>> GetUnread([FromQuery] int? customerId)
-    {
-        var notifications = await _notificationService.GetUnreadAsync(customerId);
-        return Ok(notifications);
-    }
-
-    /// <summary>
-    /// Mark notification as read.
-    /// </summary>
-    [HttpPatch("{id}/read")]
+    [HttpPost("{id}/read")]
     public async Task<IActionResult> MarkAsRead(int id)
     {
         var result = await _notificationService.MarkAsReadAsync(id);
@@ -88,13 +56,11 @@ public class NotificationsController : ControllerBase
         return NoContent();
     }
 
-    /// <summary>
-    /// Mark all notifications as read for a customer.
-    /// </summary>
-    [HttpPatch("customer/{customerId}/read-all")]
-    public async Task<IActionResult> MarkAllAsRead(int customerId)
+    [HttpGet("unread/count")]
+    public async Task<ActionResult<int>> GetUnreadCount()
     {
-        await _notificationService.MarkAllAsReadAsync(customerId);
-        return NoContent();
+        var unread = await _notificationService.GetUnreadCountAsync();
+        return Ok(unread);
     }
+
 }

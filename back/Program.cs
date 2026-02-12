@@ -1,21 +1,22 @@
 using System.Text;
+using back.Jobs;
 using back.Repositories.Customer;
 using back.Repositories.Order;
 using back.Repositories.OrderDetail;
 using back.Repositories.Product;
 using back.Services;
 using back.Services.Customers;
-using Back.Commun.Security;
+using back.Services.Orders;
 using Back.Commun.Account;
+using Back.Commun.Security;
 using Back.Data.Infrastructure.EF;
+using Hangfire;
+using Hangfire.SqlServer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using back.Services.Orders;
-using Hangfire;
-using Hangfire.SqlServer;
 
 namespace back;
 
@@ -129,7 +130,7 @@ public class Program
                 OnMessageReceived = context =>
                 {
                     var token = context.Request.Headers["Authorization"].FirstOrDefault();
-                   // Console.WriteLine($"Token received: {token}");
+                    // Console.WriteLine($"Token received: {token}");
                     return Task.CompletedTask;
                 },
                 OnAuthenticationFailed = context =>
@@ -171,17 +172,11 @@ public class Program
         builder.Services.AddHttpContextAccessor();
         // Current user provider (uses IHttpContextAccessor internally)
         builder.Services.AddScoped<ICurrentUserProvider, CurrentUserProvider>();
-        // Keyed Hangfire storage and client for 'notif' queue
-        builder.Services.AddSingleton<JobStorage>(sp =>
-            new SqlServerStorage(hangfireConn, new SqlServerStorageOptions
-            {
-                PrepareSchemaIfNecessary = true,
-                QueuePollInterval = TimeSpan.FromMilliseconds(200)
-            }));
 
-        builder.Services.AddSingleton<IBackgroundJobClient>(sp =>
-            new BackgroundJobClient(sp.GetRequiredService<JobStorage>()));
-		var app = builder.Build();
+        // Hangfire jobs
+        builder.Services.AddScoped<NotificationJobs>();
+
+        var app = builder.Build();
 
         // Configure the HTTP request pipeline
         if (app.Environment.IsDevelopment())
@@ -193,6 +188,14 @@ public class Program
         app.UseHttpsRedirection();
         app.UseAuthentication();
         app.UseAuthorization();
+
+        // Hangfire Dashboard (accessible at /hf)
+        app.UseHangfireDashboard("/hf", new DashboardOptions
+        {
+            DashboardTitle = "Back API - Jobs Dashboard",
+            DisplayStorageConnectionString = false
+        });
+
         app.MapControllers();
 
         // Auto-migrate database
@@ -206,6 +209,17 @@ public class Program
         {
             Console.WriteLine(ex.ToString());
         }
+
+        // Schedule recurring Hangfire jobs
+        RecurringJob.AddOrUpdate<back.Jobs.NotificationJobs>(
+            "process-pending-notifications",
+            job => job.ProcessPendingNotificationsAsync(),
+            Cron.Minutely);
+
+        RecurringJob.AddOrUpdate<back.Jobs.NotificationJobs>(
+            "cleanup-old-notifications",
+            job => job.CleanupOldNotificationsAsync(30),
+            Cron.Daily);
 
         app.Run();
     }

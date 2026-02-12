@@ -6,10 +6,6 @@ using Notification.Hubs;
 using Notification.Models;
 
 namespace Notification.Services;
-
-/// <summary>
-/// Service implementation for Notification operations.
-/// </summary>
 public class NotificationService : INotificationService
 {
     private readonly OltpDbContext _dbContext;
@@ -100,28 +96,17 @@ public class NotificationService : INotificationService
         _logger.LogInformation("Notification {Id} marked as read", id);
         return true;
     }
-
-    public async Task<bool> MarkAllAsReadAsync(int customerId)
+    public async Task<int> GetUnreadCountAsync()
     {
-        var notifications = await _dbContext.Notifications
-            .Where(n => n.CustomerId == customerId && !n.IsRead)
-            .ToListAsync();
-
-        foreach (var notification in notifications)
-        {
-            notification.IsRead = true;
-        }
-
-        await _dbContext.SaveChangesAsync();
-
-        _logger.LogInformation("All notifications marked as read for Customer {CustomerId}", customerId);
-        return true;
+        var res = await _dbContext.Notifications
+            .AsNoTracking()
+            .OrderByDescending(x => x.CreatedAt)
+            .CountAsync(x => !x.IsRead);
+        return res;
     }
 
-    /// <summary>
-    /// Send notification via SignalR to connected clients.
-    /// </summary>
-    private async Task SendSignalRNotificationAsync(NotificationDao notification)
+
+	private async Task SendSignalRNotificationAsync(NotificationDao notification)
     {
         try
         {
