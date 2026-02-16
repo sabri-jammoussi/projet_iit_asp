@@ -111,24 +111,20 @@ public class NotificationService : INotificationService
         try
         {
             var notificationDto = MapToDto(notification);
-            notificationDto.SentAt = DateTime.UtcNow;
 
-            // Send to specific customer if exists
+            // Send to specific customer group if a customer is attached
             if (notification.CustomerId.HasValue)
             {
-                await _hubContext.Clients
-                    .Group($"user_{notification.CustomerId}")
-                    .SendAsync("ReceiveNotification", notificationDto);
-
-                _logger.LogInformation("Notification sent via SignalR to user_{CustomerId}", notification.CustomerId);
+                var userGroup = $"user_{notification.CustomerId}";
+                await _hubContext.Clients.Group(userGroup).SendAsync("ReceiveNotification", notificationDto);
+                _logger.LogInformation("Notification {NotificationId} sent via SignalR to group {Group}", notification.Id, userGroup);
             }
 
-            // Also send to admins group
-            await _hubContext.Clients
-                .Group("admins")
-                .SendAsync("ReceiveNotification", notificationDto);
+            // Also send to admins group (use constant from hub)
+            await _hubContext.Clients.Group(NotificationHub.GroupAdmin).SendAsync("ReceiveNotification", notificationDto);
+            _logger.LogInformation("Notification {NotificationId} sent via SignalR to admins group", notification.Id);
 
-            // Update sent timestamp
+            // Update sent timestamp only after attempting sends
             notification.SentAt = DateTime.UtcNow;
             await _dbContext.SaveChangesAsync();
         }

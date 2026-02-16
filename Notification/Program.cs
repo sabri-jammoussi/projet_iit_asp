@@ -1,6 +1,9 @@
 using System.Reflection;
+using System.Text;
 using Back.Data.Infrastructure.EF;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Notification.Hubs;
 using Notification.Services;
@@ -45,8 +48,87 @@ builder.Services.AddSignalR(options =>
     options.MaximumReceiveMessageSize = null;
     options.EnableDetailedErrors = true;
 });
+// JWT Configuration
+var validIssuer = builder.Configuration.GetValue<string>("JwtTokenSettings:ValidIssuer");
+var validAudience = builder.Configuration.GetValue<string>("JwtTokenSettings:ValidAudience");
+var symmetricSecurityKey = builder.Configuration.GetValue<string>("JwtTokenSettings:SymmetricSecurityKey");
 
-// Swagger
+if (string.IsNullOrWhiteSpace(symmetricSecurityKey))
+{
+	throw new InvalidOperationException("Configuration manquante: 'JwtTokenSettings:SymmetricSecurityKey' est vide.");
+}
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+	.AddJwtBearer(options =>
+	{
+		options.TokenValidationParameters = new TokenValidationParameters
+		{
+			ClockSkew = TimeSpan.FromMinutes(5),
+			ValidateIssuer = true,
+			ValidateAudience = true,
+			ValidateLifetime = true,
+			ValidateIssuerSigningKey = true,
+			ValidIssuer = validIssuer,
+			ValidAudience = validAudience,
+			IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(symmetricSecurityKey))
+		};
+
+		options.SaveToken = true;
+
+		// CRITICAL: This is the fix for SignalR
+		options.Events = new JwtBearerEvents
+		{
+			OnMessageReceived = context =>
+			{
+				// First try to get token from Authorization header (regular HTTP requests)
+				var authorizationHeader = context.Request.Headers["Authorization"].FirstOrDefault();
+
+				if (!string.IsNullOrEmpty(authorizationHeader) &&
+					authorizationHeader.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase))
+				{
+					context.Token = authorizationHeader.Substring("Bearer ".Length).Trim();
+					Console.WriteLine("Token found in Authorization header");
+					return Task.CompletedTask;
+				}
+
+				// For SignalR connections, get token from query string
+				var path = context.HttpContext.Request.Path;
+				if (path.StartsWithSegments("/hubs"))
+				{
+					var accessToken = context.Request.Query["access_token"].FirstOrDefault();
+
+					if (!string.IsNullOrEmpty(accessToken))
+					{
+						context.Token = accessToken;
+						Console.WriteLine("Token found in query string for SignalR");
+					}
+					else
+					{
+						Console.WriteLine("No token found in query string for SignalR path");
+					}
+				}
+
+				return Task.CompletedTask;
+			},
+			OnAuthenticationFailed = context =>
+			{
+				Console.WriteLine($"Token validation failed: {context.Exception.Message}");
+				Console.WriteLine($"Path: {context.HttpContext.Request.Path}");
+				//Console.WriteLine($"Token present: {context.Token != null}");
+				return Task.CompletedTask;
+			},
+			OnTokenValidated = context =>
+			{
+				Console.WriteLine("Token successfully validated");
+				return Task.CompletedTask;
+			},
+			OnChallenge = context =>
+			{
+				Console.WriteLine($"Challenge triggered: {context.Error}, {context.ErrorDescription}");
+				return Task.CompletedTask;
+			}
+		};
+	});// Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
